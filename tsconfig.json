@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es6",
+    "outDir": "dist",
+    "removeComments": true,
+    "noImplicitAny": true
+  },
+  "include": ["api/**/*"],
+  "exclude": ["node_modules"]
+}
