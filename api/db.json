@@ -1,26 +1,42 @@
 [
   {
-    "ticketId": "1",
-    "name": "Jaime",
-    "email": "deveneciaj@gmail.com",
-    "description": "Hi! I noticed a problem with x.",
+    "ticketId": 1,
+    "name": "testington 2",
+    "email": "testington2@gmail.com",
+    "description": "this is ANOTHER test.",
     "status": "new",
     "supportTeamResponse": ""
   },
   {
-    "ticketId": "2",
-    "name": "Hemme",
-    "email": "hemmehaw@gmail.com",
-    "description": "Hi! I noticed a problem with y.",
-    "status": "completed",
-    "supportTeamResponse": "Hey Hemme! We fixed that for you."
+    "ticketId": 2,
+    "name": "pls work",
+    "email": "praying@gmail.com",
+    "description": "this is ANOTHER test.",
+    "status": "new",
+    "supportTeamResponse": ""
   },
   {
-    "ticketId": "3",
-    "name": "Alex",
-    "email": "alexcito@gmail.com",
-    "description": "Hi! Help me with z, please.",
-    "status": "in progress",
-    "supportTeamResponse": "Hey Alex! Blah blah blah..."
+    "ticketId": 3,
+    "name": "not hopeful",
+    "email": "trytry@gmail.com",
+    "description": "this is something.",
+    "status": "new",
+    "supportTeamResponse": ""
+  },
+  {
+    "ticketId": 4,
+    "name": "anotha 1",
+    "email": "fweh@gmail.com",
+    "description": "this is nothing.",
+    "status": "new",
+    "supportTeamResponse": ""
+  },
+  {
+    "ticketId": 5,
+    "name": "anotha 2",
+    "email": "fwehhhh@gmail.com",
+    "description": "this isn't nothing.",
+    "status": "new",
+    "supportTeamResponse": ""
   }
 ]

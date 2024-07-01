@@ -15,11 +15,46 @@ const ticketController: TicketController = {
         // handle if no tickets in database
         const parsedData: Ticket[] = JSON.parse(data);
         if (!parsedData.length)
-          res.locals.noTicketMessage = 'No active tickets to respond to!';
-
-        res.locals.tickets = parsedData;
+          res.locals.tickets = 'No tickets submitted yet!';
+        else res.locals.tickets = parsedData;
 
         next();
+      }
+    );
+  },
+
+  // add a new ticket to database
+  submitTicket: (req, res, next) => {
+    const { name, email, description } = req.body;
+
+    fs.readFile(
+      path.join(__dirname, '../db.json'),
+      'utf-8',
+      (err, data: string) => {
+        if (err) next(err);
+
+        const parsedData: Ticket[] = JSON.parse(data);
+        const { ticketId }: Ticket = parsedData[parsedData.length - 1];
+        const newTicketId: number = ticketId + 1;
+        const newTicket: Ticket = {
+          ticketId: newTicketId,
+          name,
+          email,
+          description,
+          status: 'new',
+          supportTeamResponse: '',
+        };
+        parsedData.push(newTicket);
+
+        fs.writeFile(
+          path.join(__dirname, '../db.json'),
+          JSON.stringify(parsedData),
+          'utf-8',
+          (err) => {
+            if (err) next(err);
+            next();
+          }
+        );
       }
     );
   },

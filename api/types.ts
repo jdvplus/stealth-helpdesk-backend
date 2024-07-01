@@ -13,4 +13,5 @@ export type Ticket = {
 
 export type TicketController = {
   getAllTickets: (req: Request, res: Response, next: NextFunction) => void;
+  submitTicket: (req: Request, res: Response, next: NextFunction) => void;
 };
