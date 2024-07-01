@@ -6,5 +6,21 @@
     "description": "Hi! I noticed a problem with x.",
     "status": "new",
     "supportTeamResponse": ""
+  },
+  {
+    "ticketId": "2",
+    "name": "Hemme",
+    "email": "hemmehaw@gmail.com",
+    "description": "Hi! I noticed a problem with y.",
+    "status": "completed",
+    "supportTeamResponse": "Hey Hemme! We fixed that for you."
+  },
+  {
+    "ticketId": "3",
+    "name": "Alex",
+    "email": "alexcito@gmail.com",
+    "description": "Hi! Help me with z, please.",
+    "status": "in progress",
+    "supportTeamResponse": "Hey Alex! Blah blah blah..."
   }
 ]

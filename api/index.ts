@@ -11,7 +11,7 @@ app.use(express.json());
 app.get('/', (req, res) => res.send('hello world'));
 
 app.get('/tickets', getAllTickets, (req, res) =>
-  res.status(200).json(res.locals.tickets)
+  res.status(200).json(res.locals.noTicketMessage || res.locals.tickets)
 );
 
 /* catch-all route handler (404) */
