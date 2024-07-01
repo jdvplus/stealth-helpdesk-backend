@@ -1,0 +1,10 @@
+[
+  {
+    "ticketId": "1",
+    "name": "Jaime",
+    "email": "deveneciaj@gmail.com",
+    "description": "Hi! I noticed a problem with x.",
+    "status": "new",
+    "supportTeamResponse": ""
+  }
+]
