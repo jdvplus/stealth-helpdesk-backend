@@ -28,8 +28,8 @@
     "name": "anotha 1",
     "email": "fweh@gmail.com",
     "description": "this is nothing.",
-    "status": "new",
-    "supportTeamResponse": ""
+    "status": "in progress",
+    "supportTeamResponse": "Hey fweh! I'm testing this route on Postman."
   },
   {
     "ticketId": 5,
@@ -44,6 +44,38 @@
     "name": "anotha 3",
     "email": "fwehhhhington@gmail.com",
     "description": "this isn't something to talk about.",
+    "status": "new",
+    "supportTeamResponse": ""
+  },
+  {
+    "ticketId": 7,
+    "name": "res.locals test",
+    "email": "resshoobies@gmail.com",
+    "description": "hi.",
+    "status": "new",
+    "supportTeamResponse": ""
+  },
+  {
+    "ticketId": 8,
+    "name": "res.locals test 2",
+    "email": "resshoobies@gmail.com 2",
+    "description": "hi. 2",
+    "status": "new",
+    "supportTeamResponse": ""
+  },
+  {
+    "ticketId": 9,
+    "name": "res.locals test 3",
+    "email": "resshoobies@gmail.com 3",
+    "description": "hi. 3",
+    "status": "new",
+    "supportTeamResponse": ""
+  },
+  {
+    "ticketId": 10,
+    "name": "res.locals test SORT",
+    "email": "resshoobies@gmail.com SORT",
+    "description": "hi. SORT",
     "status": "new",
     "supportTeamResponse": ""
   }

@@ -11,7 +11,23 @@ export type Ticket = {
   supportTeamResponse: string;
 };
 
+type ControllerMethod = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => void;
+
 export type TicketController = {
-  getAllTickets: (req: Request, res: Response, next: NextFunction) => void;
-  submitTicket: (req: Request, res: Response, next: NextFunction) => void;
+  [methodName: string]: ControllerMethod;
+};
+
+export type UserTicketSubmission = {
+  name: string;
+  email: string;
+  description: string;
+};
+
+export type SupportTeamResponseDraft = {
+  ticketId: number;
+  supportTeamResponse: string;
 };

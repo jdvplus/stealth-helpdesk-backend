@@ -1,7 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-import { Ticket, TicketController } from '../types';
+import {
+  TicketController,
+  Ticket,
+  UserTicketSubmission,
+  SupportTeamResponseDraft,
+} from '../types';
 
 const db = path.join(__dirname, '../db.json');
 
@@ -22,33 +27,49 @@ const ticketController: TicketController = {
 
   // add a new ticket to database
   submitTicket: (req, res, next) => {
-    const { name, email, description } = req.body;
+    const { name, email, description }: UserTicketSubmission = req.body;
 
-    fs.readFile(db, 'utf-8', (err, data: string) => {
+    const existingTickets: Ticket[] = res.locals.tickets;
+    const { ticketId }: Ticket = existingTickets.sort(
+      (a, b) => a.ticketId - b.ticketId
+    )[existingTickets.length - 1];
+    const newTicketId: number = ticketId + 1;
+    const newTicket: Ticket = {
+      ticketId: newTicketId,
+      name,
+      email,
+      description,
+      status: 'new',
+      supportTeamResponse: '',
+    };
+    existingTickets.push(newTicket);
+
+    fs.writeFile(db, JSON.stringify(existingTickets), 'utf-8', (err) => {
       if (err) next(err);
+      next();
+    });
+  },
 
-      const parsedData: Ticket[] = JSON.parse(data);
-      const { ticketId }: Ticket = parsedData[parsedData.length - 1];
-      const newTicketId: number = ticketId + 1;
-      const newTicket: Ticket = {
-        ticketId: newTicketId,
-        name,
-        email,
-        description,
-        status: 'new',
-        supportTeamResponse: '',
-      };
-      parsedData.push(newTicket);
+  saveTeamResponseDraft: (req, res, next) => {
+    const { ticketId, supportTeamResponse }: SupportTeamResponseDraft =
+      req.body;
 
-      fs.writeFile(
-        path.join(__dirname, '../db.json'),
-        JSON.stringify(parsedData),
-        'utf-8',
-        (err) => {
-          if (err) next(err);
-          next();
-        }
-      );
+    const existingTickets: Ticket[] = res.locals.tickets;
+
+    const ticketToUpdate: Ticket = existingTickets.filter(
+      (ticket: Ticket) => ticket.ticketId === ticketId
+    )[0];
+    ticketToUpdate.supportTeamResponse = supportTeamResponse;
+    ticketToUpdate.status = 'in progress';
+
+    const updatedTickets: Ticket[] = existingTickets.filter(
+      (ticket: Ticket) => ticket.ticketId !== ticketId
+    );
+    updatedTickets.push(ticketToUpdate);
+
+    fs.writeFile(db, JSON.stringify(updatedTickets), 'utf-8', (err) => {
+      if (err) next(err);
+      next();
     });
   },
 };
