@@ -10,7 +10,15 @@ import {
 
 const db = path.join(__dirname, '../db.json');
 
-const updateTicket = (
+/**
+ * Helper function to update the status of an existing ticket in the database.
+ *
+ * @param reqBody - incoming request body
+ * @param existingTickets - the current state of tickets in the database
+ * @param status - a string with which to update the ticket's status
+ * @returns an updated array of tickets
+ */
+const updateTicketStatus = (
   reqBody: SupportTeamResponse,
   existingTickets: Ticket[],
   status: 'in progress' | 'resolved'
@@ -55,8 +63,10 @@ const ticketController: TicketController = {
   // add a new ticket to database
   submitTicket: (req, res, next) => {
     const { name, email, description }: UserTicketSubmission = req.body;
-
     const existingTickets: Ticket[] = res.locals.tickets;
+
+    // obtain ticket id of most recent ticket in database
+    // (to give new ticket last ticket ID + 1)
     const { ticketId }: Ticket = existingTickets.sort(
       (a, b) => a.ticketId - b.ticketId
     )[existingTickets.length - 1];
@@ -77,11 +87,13 @@ const ticketController: TicketController = {
     });
   },
 
-  // save draft of working response (auto sets status to 'in progress')
+  // save draft of working response (auto sets ticket status to 'in progress')
   saveTeamResponseDraft: (req, res, next) => {
     fs.writeFile(
       db,
-      JSON.stringify(updateTicket(req.body, res.locals.tickets, 'in progress')),
+      JSON.stringify(
+        updateTicketStatus(req.body, res.locals.tickets, 'in progress')
+      ),
       'utf-8',
       (err) => {
         if (err) next(err);
@@ -94,7 +106,9 @@ const ticketController: TicketController = {
   resolveTicketAndSendEmail: (req, res, next) => {
     fs.writeFile(
       db,
-      JSON.stringify(updateTicket(req.body, res.locals.tickets, 'resolved')),
+      JSON.stringify(
+        updateTicketStatus(req.body, res.locals.tickets, 'resolved')
+      ),
       'utf-8',
       (err) => {
         if (err) next(err);

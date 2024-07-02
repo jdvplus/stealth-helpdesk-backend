@@ -13,12 +13,12 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('hello world'));
-
+// GET route: retrieve all tickets from db
 app.get('/tickets', getAllTickets, (req, res) =>
   res.status(200).json(res.locals.tickets)
 );
 
+// POST route: submit ticket to support team
 app.post('/tickets', getAllTickets, submitTicket, (req, res) =>
   res
     .status(200)
@@ -27,10 +27,12 @@ app.post('/tickets', getAllTickets, submitTicket, (req, res) =>
     )
 );
 
+// POST route: save draft of team member response
 app.post('/savedraft', getAllTickets, saveTeamResponseDraft, (req, res) =>
   res.status(200).send('Draft saved!')
 );
 
+// POST route: resolve ticket + respond to user with email
 app.post('/resolve', getAllTickets, resolveTicketAndSendEmail, (req, res) =>
   res.status(200).send('Woohoo! Ticket resolved.')
 );
