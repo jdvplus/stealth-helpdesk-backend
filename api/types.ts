@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 type TicketStatus = 'new' | 'in progress' | 'resolved';
 
 export type Ticket = {
-  ticketId: number;
   name: string;
   email: string;
   description: string;
@@ -18,7 +17,7 @@ export type UserTicketSubmission = {
 };
 
 export type SupportTeamResponse = {
-  ticketId: number;
+  ticketId: string;
   supportTeamResponse: string;
 };
 

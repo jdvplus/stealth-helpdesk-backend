@@ -19,7 +19,7 @@ app.get('/tickets', getAllTickets, (req, res) =>
 );
 
 // POST route: submit ticket to support team
-app.post('/tickets', getAllTickets, submitTicket, (req, res) =>
+app.post('/tickets', submitTicket, (req, res) =>
   res
     .status(200)
     .send(
@@ -27,15 +27,15 @@ app.post('/tickets', getAllTickets, submitTicket, (req, res) =>
     )
 );
 
-// POST route: save draft of team member response
-app.post('/savedraft', getAllTickets, saveTeamResponseDraft, (req, res) =>
-  res.status(200).send('Draft saved!')
-);
+// // POST route: save draft of team member response
+// app.post('/savedraft', getAllTickets, saveTeamResponseDraft, (req, res) =>
+//   res.status(200).send('Draft saved!')
+// );
 
-// POST route: resolve ticket + respond to user with email
-app.post('/resolve', getAllTickets, resolveTicketAndSendEmail, (req, res) =>
-  res.status(200).send('Woohoo! Ticket resolved.')
-);
+// // POST route: resolve ticket + respond to user with email
+// app.post('/resolve', getAllTickets, resolveTicketAndSendEmail, (req, res) =>
+//   res.status(200).send('Woohoo! Ticket resolved.')
+// );
 
 /* catch-all route handler (404) */
 app.use((req, res) => res.status(404).send('oops! nothing here.'));
