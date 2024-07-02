@@ -8,7 +8,7 @@ import {
   SupportTeamResponse,
 } from '../types';
 
-const db = '/tmp/db.json';
+const db = path.join(__dirname, '../db.json');
 
 /**
  * Helper function to update the status of an existing ticket in the database.
