@@ -3,11 +3,11 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const MONGO_URI: string = process.env.MONGO_URI || '[your_URI_here]';
+const MONGODB_URI: string = process.env.MONGODB_URI || '[your_URI_here]';
 
 const connectToDatabase = async (): Promise<void> => {
   try {
-    await mongoose.connect(MONGO_URI, {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       dbName: 'zealthy-helpdesk-tickets-jdv724',
