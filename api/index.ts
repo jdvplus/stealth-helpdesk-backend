@@ -1,7 +1,8 @@
 import express, { ErrorRequestHandler } from 'express';
 
 import ticketController from './controllers/ticketController';
-const { getAllTickets, submitTicket, saveTeamResponseDraft } = ticketController;
+const { getAllTickets, submitTicket, saveTeamResponseDraft, resolveTicket } =
+  ticketController;
 
 const app = express();
 const PORT = 3000;
@@ -24,6 +25,10 @@ app.post('/tickets', getAllTickets, submitTicket, (req, res) =>
 
 app.post('/savedraft', getAllTickets, saveTeamResponseDraft, (req, res) =>
   res.status(200).send('Draft saved!')
+);
+
+app.post('/resolve', getAllTickets, resolveTicket, (req, res) =>
+  res.status(200).send('Woohoo! Ticket resolved.')
 );
 
 /* catch-all route handler (404) */

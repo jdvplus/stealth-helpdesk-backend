@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-type TicketStatus = 'new' | 'in progress' | 'completed';
+type TicketStatus = 'new' | 'in progress' | 'resolved';
 
 export type Ticket = {
   ticketId: number;
@@ -27,7 +27,7 @@ export type UserTicketSubmission = {
   description: string;
 };
 
-export type SupportTeamResponseDraft = {
+export type SupportTeamResponse = {
   ticketId: number;
   supportTeamResponse: string;
 };

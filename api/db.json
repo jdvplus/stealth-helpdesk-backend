@@ -12,8 +12,8 @@
     "name": "pls work",
     "email": "praying@gmail.com",
     "description": "this is ANOTHER test.",
-    "status": "new",
-    "supportTeamResponse": ""
+    "status": "resolved",
+    "supportTeamResponse": "Keep praying!"
   },
   {
     "ticketId": 3,
@@ -36,16 +36,16 @@
     "name": "anotha 2",
     "email": "fwehhhh@gmail.com",
     "description": "this isn't nothing.",
-    "status": "new",
-    "supportTeamResponse": ""
+    "status": "in progress",
+    "supportTeamResponse": "i'm looking into fweh for u."
   },
   {
     "ticketId": 6,
     "name": "anotha 3",
     "email": "fwehhhhington@gmail.com",
     "description": "this isn't something to talk about.",
-    "status": "new",
-    "supportTeamResponse": ""
+    "status": "in progress",
+    "supportTeamResponse": "figuring it out..."
   },
   {
     "ticketId": 7,

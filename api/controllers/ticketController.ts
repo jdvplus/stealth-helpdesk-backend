@@ -5,10 +5,31 @@ import {
   TicketController,
   Ticket,
   UserTicketSubmission,
-  SupportTeamResponseDraft,
+  SupportTeamResponse,
 } from '../types';
 
 const db = path.join(__dirname, '../db.json');
+
+const updateTicket = (
+  reqBody: SupportTeamResponse,
+  existingTickets: Ticket[],
+  status: 'in progress' | 'resolved'
+): Ticket[] => {
+  const { ticketId, supportTeamResponse }: SupportTeamResponse = reqBody;
+
+  const ticketToUpdate: Ticket = existingTickets.filter(
+    (ticket: Ticket) => ticket.ticketId === ticketId
+  )[0];
+  ticketToUpdate.supportTeamResponse = supportTeamResponse;
+  ticketToUpdate.status = status;
+
+  const updatedTickets: Ticket[] = existingTickets.filter(
+    (ticket: Ticket) => ticket.ticketId !== ticketId
+  );
+  updatedTickets.push(ticketToUpdate);
+
+  return updatedTickets;
+};
 
 const ticketController: TicketController = {
   // retrieve all existing tickets from database
@@ -17,11 +38,17 @@ const ticketController: TicketController = {
       if (err) next(err);
 
       const parsedData: Ticket[] = JSON.parse(data);
-      res.locals.tickets = parsedData.length
-        ? parsedData
+      const sortedData: Ticket[] = parsedData.sort(
+        (a, b) => a.ticketId - b.ticketId
+      );
+      res.locals.tickets = sortedData.length
+        ? sortedData
         : 'No tickets submitted yet!';
 
-      next();
+      fs.writeFile(db, JSON.stringify(sortedData), 'utf-8', (err) => {
+        if (err) next(err);
+        next();
+      });
     });
   },
 
@@ -51,26 +78,27 @@ const ticketController: TicketController = {
   },
 
   saveTeamResponseDraft: (req, res, next) => {
-    const { ticketId, supportTeamResponse }: SupportTeamResponseDraft =
-      req.body;
-
-    const existingTickets: Ticket[] = res.locals.tickets;
-
-    const ticketToUpdate: Ticket = existingTickets.filter(
-      (ticket: Ticket) => ticket.ticketId === ticketId
-    )[0];
-    ticketToUpdate.supportTeamResponse = supportTeamResponse;
-    ticketToUpdate.status = 'in progress';
-
-    const updatedTickets: Ticket[] = existingTickets.filter(
-      (ticket: Ticket) => ticket.ticketId !== ticketId
+    fs.writeFile(
+      db,
+      JSON.stringify(updateTicket(req.body, res.locals.tickets, 'in progress')),
+      'utf-8',
+      (err) => {
+        if (err) next(err);
+        next();
+      }
     );
-    updatedTickets.push(ticketToUpdate);
+  },
 
-    fs.writeFile(db, JSON.stringify(updatedTickets), 'utf-8', (err) => {
-      if (err) next(err);
-      next();
-    });
+  resolveTicket: (req, res, next) => {
+    fs.writeFile(
+      db,
+      JSON.stringify(updateTicket(req.body, res.locals.tickets, 'resolved')),
+      'utf-8',
+      (err) => {
+        if (err) next(err);
+        next();
+      }
+    );
   },
 };
 
