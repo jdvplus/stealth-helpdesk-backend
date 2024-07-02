@@ -4,8 +4,8 @@
     "name": "testington 2",
     "email": "testington2@gmail.com",
     "description": "this is ANOTHER test.",
-    "status": "new",
-    "supportTeamResponse": ""
+    "status": "resolved",
+    "supportTeamResponse": "Fixed it for you."
   },
   {
     "ticketId": 2,
@@ -14,14 +14,6 @@
     "description": "this is ANOTHER test.",
     "status": "resolved",
     "supportTeamResponse": "Keep praying!"
-  },
-  {
-    "ticketId": 3,
-    "name": "not hopeful",
-    "email": "trytry@gmail.com",
-    "description": "this is something.",
-    "status": "new",
-    "supportTeamResponse": ""
   },
   {
     "ticketId": 4,
@@ -78,5 +70,13 @@
     "description": "hi. SORT",
     "status": "new",
     "supportTeamResponse": ""
+  },
+  {
+    "ticketId": 3,
+    "name": "not hopeful",
+    "email": "trytry@gmail.com",
+    "description": "this is something.",
+    "status": "resolved",
+    "supportTeamResponse": "Fixed it for you as well."
   }
 ]

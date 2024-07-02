@@ -77,6 +77,7 @@ const ticketController: TicketController = {
     });
   },
 
+  // save draft of working response (auto sets status to 'in progress')
   saveTeamResponseDraft: (req, res, next) => {
     fs.writeFile(
       db,
@@ -89,7 +90,8 @@ const ticketController: TicketController = {
     );
   },
 
-  resolveTicket: (req, res, next) => {
+  // resolve ticket (auto sets status to 'resolved' & "sends email" [see comment])
+  resolveTicketAndSendEmail: (req, res, next) => {
     fs.writeFile(
       db,
       JSON.stringify(updateTicket(req.body, res.locals.tickets, 'resolved')),
@@ -99,6 +101,27 @@ const ticketController: TicketController = {
         next();
       }
     );
+
+    /*
+    NOTE: In a professional/production-level implementation of this application, this is where we'd implement functionality to send the corresponding user an email containing the support team's response to the ticket.
+    
+    (We could use https://github.com/sendgrid/sendgrid-nodejs, for example.)
+    */
+
+    const { ticketId, supportTeamResponse }: SupportTeamResponse = req.body;
+    const existingTickets: Ticket[] = res.locals.tickets;
+
+    const resolvedTicket: Ticket = existingTickets.filter(
+      (ticket: Ticket) => ticket.ticketId === ticketId
+    )[0];
+    const { email }: Ticket = resolvedTicket;
+
+    // as per the assignment instructions, here is a simple console.log implementation.
+    console.log(`
+      to: ${email}
+      subject: '[Ticket #${ticketId}: RESOLVED] Thanks for getting in touch!'
+      body: ${supportTeamResponse}
+      `);
   },
 };
 

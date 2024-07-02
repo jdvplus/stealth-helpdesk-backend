@@ -1,8 +1,12 @@
 import express, { ErrorRequestHandler } from 'express';
 
 import ticketController from './controllers/ticketController';
-const { getAllTickets, submitTicket, saveTeamResponseDraft, resolveTicket } =
-  ticketController;
+const {
+  getAllTickets,
+  submitTicket,
+  saveTeamResponseDraft,
+  resolveTicketAndSendEmail,
+} = ticketController;
 
 const app = express();
 const PORT = 3000;
@@ -27,7 +31,7 @@ app.post('/savedraft', getAllTickets, saveTeamResponseDraft, (req, res) =>
   res.status(200).send('Draft saved!')
 );
 
-app.post('/resolve', getAllTickets, resolveTicket, (req, res) =>
+app.post('/resolve', getAllTickets, resolveTicketAndSendEmail, (req, res) =>
   res.status(200).send('Woohoo! Ticket resolved.')
 );
 
