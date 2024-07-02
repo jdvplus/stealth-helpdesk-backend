@@ -1,12 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 
+import connectToDatabase from '../connectToDatabase';
 import {
   TicketController,
   Ticket,
   UserTicketSubmission,
   SupportTeamResponse,
 } from '../types';
+
+connectToDatabase();
 
 const db = path.join(__dirname, '../db.json');
 
