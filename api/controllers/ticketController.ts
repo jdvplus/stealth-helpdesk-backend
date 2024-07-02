@@ -8,7 +8,7 @@ import {
   SupportTeamResponse,
 } from '../types';
 
-const db = path.join(process.cwd(), '/api/db.json');
+const db = path.join(process.cwd(), '/api/tmp/db.json');
 
 /**
  * Helper function to update the status of an existing ticket in the database.
@@ -42,6 +42,7 @@ const updateTicketStatus = (
 const ticketController: TicketController = {
   // retrieve all existing tickets from database
   getAllTickets: (req, res, next) => {
+    console.log('DB', db)
     fs.readFile(db, 'utf-8', (err, data: string) => {
       if (err) next(err);
 
