@@ -1,5 +1,5 @@
 import connectToDatabase from '../connectToDatabase';
-import { TicketModel } from '../models/TicketModel';
+import { TicketModel } from '../models/TicketModel2';
 import { TicketController, Ticket, UserTicketSubmission } from '../types';
 
 connectToDatabase();
