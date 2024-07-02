@@ -8,4 +8,4 @@ const ticketSchema = new Schema({
   status: { type: String, default: 'new' },
   supportTeamResponse: { type: String, default: '' },
 });
-export const Ticket = mongoose.model('ticket', ticketSchema);
+export const TicketModel = mongoose.model('ticket', ticketSchema);

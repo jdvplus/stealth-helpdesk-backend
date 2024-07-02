@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import connectToDatabase from '../connectToDatabase';
+import { TicketModel } from '../models/TicketModel';
 import {
   TicketController,
   Ticket,
@@ -44,23 +45,14 @@ const updateTicketStatus = (
 
 const ticketController: TicketController = {
   // retrieve all existing tickets from database
-  getAllTickets: (req, res, next) => {
-    fs.readFile(db, 'utf-8', (err, data: string) => {
-      if (err) next(err);
-
-      const parsedData: Ticket[] = JSON.parse(data);
-      const sortedData: Ticket[] = parsedData.sort(
-        (a, b) => a.ticketId - b.ticketId
-      );
-      res.locals.tickets = sortedData.length
-        ? sortedData
-        : 'No tickets submitted yet!';
-
-      fs.writeFile(db, JSON.stringify(sortedData), 'utf-8', (err) => {
-        if (err) next(err);
-        next();
-      });
-    });
+  getAllTickets: async (req, res, next) => {
+    try {
+      const tickets = await TicketModel.find();
+      res.locals.tickets = tickets;
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
   },
 
   // add a new ticket to database
