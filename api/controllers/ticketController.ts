@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path, { resolve } from 'path';
-
 import connectToDatabase from '../connectToDatabase';
 import { TicketModel } from '../models/TicketModel';
 import { TicketController, Ticket, UserTicketSubmission } from '../types';
@@ -73,9 +70,10 @@ const ticketController: TicketController = {
       NOTE: In a professional/production-level implementation of this application, this is where we'd implement functionality to send the corresponding user an email containing the support team's response to the ticket.
 
       (We could use https://github.com/sendgrid/sendgrid-nodejs, for example.)
+
+      As per the assignment instructions, below is a simpler implementation for convenience within this assessment.
       */
 
-      // as per the assignment instructions, here is a simpler implementation for this assessment.
       res.locals.resolvedMessage = `
         from: support@zealthy.com
         to: ${name} | ${email}
