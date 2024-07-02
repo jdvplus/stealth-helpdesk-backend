@@ -42,7 +42,6 @@ const updateTicketStatus = (
 const ticketController: TicketController = {
   // retrieve all existing tickets from database
   getAllTickets: (req, res, next) => {
-    console.log('DB', db);
     fs.readFile(db, 'utf-8', (err, data: string) => {
       if (err) next(err);
 
