@@ -16,11 +16,6 @@ export type UserTicketSubmission = {
   description: string;
 };
 
-export type SupportTeamResponse = {
-  ticketId: string;
-  supportTeamResponse: string;
-};
-
 type ControllerMethod = (
   req: Request,
   res: Response,
