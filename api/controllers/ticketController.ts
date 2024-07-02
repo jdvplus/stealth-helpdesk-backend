@@ -8,7 +8,13 @@ import {
   SupportTeamResponse,
 } from '../types';
 
-const db = path.join(__dirname, '../db.json');
+let db: string;
+if (process.env.DEV && process.env.DEV === 'Yes') {
+  db = path.join(__dirname, `../../tmp/db.json`);
+} else {
+  db = '/tmp/db.json';
+}
+// const db = path.join(__dirname, '../db.json');
 
 /**
  * Helper function to update the status of an existing ticket in the database.

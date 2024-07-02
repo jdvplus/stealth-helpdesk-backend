@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "dev": "nodemon",
+    "start": "tsc && node dist/index.js"
+  },
   "dependencies": {
     "express": "^4.19.2"
   },
