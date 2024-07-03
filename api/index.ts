@@ -1,4 +1,5 @@
 import express, { ErrorRequestHandler } from 'express';
+import cors from 'cors';
 import mongoSanitize from 'express-mongo-sanitize';
 // ^ library for sanitizing user-submitted data
 // (https://www.npmjs.com/package/express-mongo-sanitize)
@@ -15,6 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors);
 app.use(mongoSanitize());
 
 // GET route: retrieve all tickets from db
