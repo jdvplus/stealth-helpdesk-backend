@@ -23,5 +23,5 @@ type ControllerMethod = (
 ) => void;
 
 export type TicketController = {
-  [methodName: string]: ControllerMethod;
+  [method: string]: ControllerMethod;
 };

@@ -2,11 +2,11 @@ import connectToDatabase from '../connectToDatabase';
 import { TicketModel } from '../models/TicketModel';
 import { TicketController, Ticket, UserTicketSubmission } from '../types';
 
-connectToDatabase();
+connectToDatabase(); // initialize database connection
 
 const ticketController: TicketController = {
   // retrieve all existing tickets from database
-  getAllTickets: async (req, res, next) => {
+  getAllTickets: async (_, res, next) => {
     try {
       const tickets = await TicketModel.find();
       res.locals.tickets = tickets;
@@ -21,7 +21,6 @@ const ticketController: TicketController = {
   // add a new ticket to database
   submitTicket: async (req, res, next) => {
     const { name, email, description }: UserTicketSubmission = req.body;
-    if (!name || !email || !description) return;
 
     try {
       await TicketModel.create({ name, email, description });
