@@ -28,19 +28,19 @@ app.get('/tickets', getAllTickets, (_, res) =>
 app.post('/tickets', submitTicket, (_, res) =>
   res
     .status(200)
-    .send(
+    .json(
       "Thanks for submitting a help desk request! We'll get back to you as soon as we can."
     )
 );
 
 // PATCH route: save draft of team member response for specific ticket
 app.patch('/savedraft/:ticketId', saveTeamResponseDraft, (_, res) =>
-  res.status(200).send('Draft saved!')
+  res.status(200).json('Draft saved!')
 );
 
 // PATCH route: resolve ticket + respond to user with email
 app.patch('/resolve/:ticketId', resolveTicketAndSendEmail, (_, res) =>
-  res.status(200).send(res.locals.resolvedMessage)
+  res.status(200).json(res.locals.resolvedMessage)
 );
 
 /* catch-all route handler (404) */
