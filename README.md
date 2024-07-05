@@ -4,6 +4,10 @@
 
 This backend application connects to an external MongoDB database.
 
+## Tech Stack
+
+TypeScript + ESLint, `cors`, [`express-mongo-sanitize`](https://www.npmjs.com/package/express-mongo-sanitize), MongoDB, Mongoose, Nodemon, `ts-node`
+
 ## Getting Started
 
 This project is a server built with Node.js & Express.
