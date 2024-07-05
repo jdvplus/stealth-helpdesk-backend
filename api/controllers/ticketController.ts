@@ -74,7 +74,7 @@ const ticketController: TicketController = {
       */
 
       res.locals.resolvedMessage = `
-        from: support@zealthy.com
+        from: support@stealthstartup.com
         to: ${name} | ${email}
 
         message:
