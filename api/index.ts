@@ -7,6 +7,7 @@ import mongoSanitize from 'express-mongo-sanitize';
 import ticketController from './controllers/ticketController';
 const {
   getAllTickets,
+  findOneTicket,
   submitTicket,
   saveTeamResponseDraft,
   resolveTicketAndSendEmail,
@@ -22,6 +23,11 @@ app.use(mongoSanitize());
 // GET route: retrieve all tickets from db
 app.get('/tickets', getAllTickets, (_, res) =>
   res.status(200).json(res.locals.tickets)
+);
+
+// GET route: retrieve one specific ticket from db
+app.get('/tickets/:ticketId', findOneTicket, (_, res) =>
+  res.status(200).json(res.locals.ticket)
 );
 
 // POST route: submit ticket to support team

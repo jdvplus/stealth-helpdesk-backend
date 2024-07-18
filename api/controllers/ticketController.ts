@@ -18,8 +18,23 @@ const ticketController: TicketController = {
     }
   },
 
+  // retrieve specific ticket from database
+  findOneTicket: async (req, res, next) => {
+    const { ticketId } = req.params;
+
+    try {
+      const ticket = await TicketModel.findById(ticketId);
+      res.locals.ticket = ticket;
+
+      next();
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  },
+
   // add a new ticket to database
-  submitTicket: async (req, res, next) => {
+  submitTicket: async (req, _, next) => {
     const { name, email, description }: UserTicketSubmission = req.body;
 
     try {
@@ -33,7 +48,7 @@ const ticketController: TicketController = {
   },
 
   // save draft of working response (sets ticket status to 'in progress')
-  saveTeamResponseDraft: async (req, res, next) => {
+  saveTeamResponseDraft: async (req, _, next) => {
     const { ticketId } = req.params;
     const { supportTeamResponse } = req.body;
 
